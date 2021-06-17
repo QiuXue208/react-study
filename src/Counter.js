@@ -28,15 +28,20 @@ class Counter extends React.Component {
   }
 
   handleIncrement = () => {
-    this.setState(state => ({
-      count: state.count + 1
-    }))
+    this.updateContent(true)
   }
 
   handleDecrement = () => {
-    this.setState(state => ({
-      count: state.count - 1
-    }))
+    this.updateContent(false)
+  }
+
+  updateContent = (flg = false) => {
+    const previousCount = this.state.count
+    const currentCount = flg ? previousCount + 1 : previousCount - 1
+    this.setState({
+      count: currentCount
+    })
+    this.props.onUpdate(currentCount, previousCount)
   }
 
   render() {
@@ -53,11 +58,13 @@ class Counter extends React.Component {
 
 Counter.propTypes = {
   caption: PropTypes.string.isRequired,
-  initialValue: PropTypes.number
+  initialValue: PropTypes.number,
+  onUpdate: PropTypes.func
 }
 
 Counter.defaultProps = {
-  initialValue: 0
+  initialValue: 0,
+  onUpdate: () => {}
 }
 
 export default Counter
