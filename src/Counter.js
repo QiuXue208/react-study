@@ -12,11 +12,14 @@ class Counter extends React.Component {
 
   componentWillMount() {
     console.log(`${this.props.caption} - componentWillMount`)
-
   }
 
   componentDidMount() {
     console.log(`${this.props.caption} - componentDidMount`)
+  }
+
+  componentWillReceiveProps() {
+    console.log(`${this.props.caption} - componentWillReceiveProps`)
   }
 
   handleIncrement = () => {
@@ -34,7 +37,7 @@ class Counter extends React.Component {
   render() {
     console.log(`${this.props.caption} - render`)
     return (
-      <div style={{ textAlign: 'center'}}>
+      <div>
       <button onClick={this.handleIncrement}>+</button>
       <button onClick={this.handleDecrement}>-</button>
       <span>{this.props.caption} count: {this.state.count}</span>
