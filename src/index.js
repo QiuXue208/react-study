@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import ClickCounter from './ClickCounter';
+import ControlPanel from './ControlPanel';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ClickCounter />
+    <ControlPanel />
   </React.StrictMode>,
   document.getElementById('root')
 );
