@@ -7,7 +7,18 @@ class Counter extends React.Component {
     this.state = {
       count: props.initialValue
     }
+    console.log(`${props.caption} - constructor`)
   }
+
+  componentWillMount() {
+    console.log(`${this.props.caption} - componentWillMount`)
+
+  }
+
+  componentDidMount() {
+    console.log(`${this.props.caption} - componentDidMount`)
+  }
+
   handleIncrement = () => {
     this.setState(state => ({
       count: state.count + 1
@@ -21,6 +32,7 @@ class Counter extends React.Component {
   }
 
   render() {
+    console.log(`${this.props.caption} - render`)
     return (
       <div style={{ textAlign: 'center'}}>
       <button onClick={this.handleIncrement}>+</button>
