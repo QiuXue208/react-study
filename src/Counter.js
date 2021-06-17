@@ -22,6 +22,11 @@ class Counter extends React.Component {
     console.log(`${this.props.caption} - componentWillReceiveProps`)
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(`${this.props.caption} - shouldComponentUpdate`)
+    return this.props.caption !== nextProps.caption || this.state.count !== nextState.count
+  }
+
   handleIncrement = () => {
     this.setState(state => ({
       count: state.count + 1
