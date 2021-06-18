@@ -1,11 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import CounterStore from '../stores/CounterStore'
+import * as Actions from '../Actions'
 
 class Counter extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      count: props.initialValue
+      count: CounterStore.getCounterValues()[props.caption]
     }
     console.log(`${props.caption} - constructor`)
   }
@@ -15,6 +17,7 @@ class Counter extends React.Component {
   }
 
   componentDidMount() {
+    CounterStore.addChangeListener(this.onchange)
     console.log(`${this.props.caption} - componentDidMount`)
   }
 
@@ -27,21 +30,23 @@ class Counter extends React.Component {
     return this.props.caption !== nextProps.caption || this.state.count !== nextState.count
   }
 
+  componentWillUnmount() {
+    CounterStore.removeChangeListener(this.onchange)
+  }
+
   handleIncrement = () => {
-    this.updateContent(true)
+    Actions.increment(this.props.caption)
   }
 
   handleDecrement = () => {
-    this.updateContent(false)
+    Actions.decrement(this.props.caption)
   }
 
-  updateContent = (flg = false) => {
-    const previousCount = this.state.count
-    const currentCount = flg ? previousCount + 1 : previousCount - 1
+  onchange = () => {
+    const newValue = CounterStore.getCounterValues()[this.props.caption]
     this.setState({
-      count: currentCount
+      count: newValue
     })
-    this.props.onUpdate(currentCount, previousCount)
   }
 
   render() {

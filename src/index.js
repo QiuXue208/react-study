@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ClickCounter from './ClickCounter';
-import ControlPanel from './ControlPanel';
+import ControlPanel from './views/ControlPanel';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
