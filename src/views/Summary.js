@@ -1,33 +1,38 @@
-import React from 'react'
-import SummaryStore from '../stores/SummeryStore'
+import React from 'react';
+import store from '../Store';
 
 class Summary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sum: SummaryStore.getSummary()
-    }
+    this.state = this.getOwnState();
   }
 
   componentDidMount() {
-    SummaryStore.addChangeListener(this.onUpdate)
+    store.subscribe(this.onChange);
   }
 
   componentWillUnmount() {
-    SummaryStore.removeChangeListener(this.onUpdate)
+    store.unsubscribe(this.onChange);
   }
 
-  onUpdate = () => {
-    this.setState({
-      sum: SummaryStore.getSummary()
-    })
-  }
+  onChange = () => {
+    this.setState(this.getOwnState());
+  };
+
+  getOwnState = () => {
+    const state = store.getState();
+    let sum = 0;
+    for (let key in state) {
+      if (state.hasOwnProperty(key)) {
+        sum += state[key];
+      }
+    }
+    return { sum: sum };
+  };
 
   render() {
-    return (
-      <div>Total Count: {this.state.sum}</div>
-    )
+    return <div>Total Count: {this.state.sum}</div>;
   }
 }
 
-export default Summary
+export default Summary;
