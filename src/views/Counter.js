@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as Actions from '../Actions';
+import { connect } from 'react-redux';
 class Counter extends React.Component {
   render() {
     const { handleIncrement, handleDecrement, value, caption } = this.props;
@@ -13,6 +15,23 @@ class Counter extends React.Component {
       </div>
     );
   }
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    value: state[ownProps.caption],
+  };
+}
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    handleIncrement: () => {
+      dispatch(Actions.increment(ownProps.caption));
+    },
+    handleDecrement: () => {
+      dispatch(Actions.decrement(ownProps.caption));
+    },
+  };
 }
 
 Counter.propTypes = {
@@ -29,4 +48,4 @@ Counter.defaultProps = {
   handleIncrement: () => {},
 };
 
-export default Counter;
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import ControlPanel from './views/ControlPanel';
-import './Store';
+import store from './Store';
+import { Provider } from 'react-redux';
 
-ReactDOM.render(<ControlPanel />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <ControlPanel />
+  </Provider>,
+  document.getElementById('root'),
+);

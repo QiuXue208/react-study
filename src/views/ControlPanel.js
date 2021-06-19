@@ -1,6 +1,6 @@
 import React from 'react';
-import CounterContainer from './CounterContainer';
-import SummaryContainer from './SummaryContainer';
+import Counter from './Counter';
+import Summary from './Summary';
 
 class ControlPanel extends React.Component {
   constructor(props) {
@@ -18,11 +18,11 @@ class ControlPanel extends React.Component {
     return (
       <>
         <div style={{ textAlign: 'center' }}>
-          <CounterContainer caption="First" />
-          <CounterContainer caption="Second" />
-          <CounterContainer caption="Third" />
+          <Counter caption="First" />
+          <Counter caption="Second" />
+          <Counter caption="Third" />
           {/*  forceUpdate: 强制触发组件重新渲染，这将调用组件的render方法 */}
-          <SummaryContainer />
+          <Summary />
           <button onClick={() => this.forceUpdate()}>
             click me to repaint!
           </button>
